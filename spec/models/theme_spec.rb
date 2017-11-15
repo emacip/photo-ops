@@ -1,7 +1,7 @@
 # spec/models/theme_spec.rb
 require 'rails_helper'
 
-# Test suite for the Stand model
+# Test suite for the Theme model
 RSpec.describe Theme, type: :model do
 
   # Validation tests

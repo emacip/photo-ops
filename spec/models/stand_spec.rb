@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Stand, type: :model do
 
   # Association test
-  # ensure an theme record belongs to a single stand record
+  # ensure Stand model has a 1:1 relationship with the Theme model
   it { should have_one(:theme).with_foreign_key('theme_id') }
 
   # Validation tests
