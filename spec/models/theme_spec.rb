@@ -6,5 +6,5 @@ RSpec.describe Theme, type: :model do
 
   # Validation tests
   # ensure columns title is present before saving
-  it { should validate_presence_of(:title) }
+  it { is_expected.to  validate_presence_of(:title) }
 end
