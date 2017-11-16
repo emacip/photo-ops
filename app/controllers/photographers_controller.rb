@@ -9,7 +9,7 @@ class PhotographersController < ApplicationController
 
   # GET /photographers/:id
   def show
-    json_response(@photographer)
+    json_response(@photographer.photos)
   end
 
   private

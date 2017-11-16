@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Photographers API', type: :request do
   # initialize test data
-  let!(:photographers) { create_list(:photographer, 10) }
-  let(:photographer_id) { photographers.first.id }
-  let(:photos) { photographers.photos }
+  let!(:photographer) { create(:photographer) }
+  let!(:photos) { create_list(:photo, 20, photographer_id: photographer.id) }
+  let(:photographer_id) { photographer.id }
 
   # Test suite for GET /photographers
   describe 'GET /photographers' do
@@ -15,7 +15,7 @@ RSpec.describe 'Photographers API', type: :request do
 
     it 'returns photographers' do
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(1)
     end
 
     it 'returns status code 200' do
@@ -23,20 +23,18 @@ RSpec.describe 'Photographers API', type: :request do
     end
   end
 
-  # Test suite for GET /photographers/:id
-  describe 'GET /photographers/:id' do
+  # Test suite for GET /photographers/:photographer_id/photos
+  describe 'GET /photographers/:photographer_id/photos' do
     # make HTTP get request before each example
-    before { get "/photographers/#{photographer_id}" }
+    before { get "/photographers/#{photographer_id}/photos" }
 
-    context 'when the record exists' do
-      it 'returns the photographer' do
-        expect(json).not_to be_empty
-        expect(json['id']).to eq(photographer_id)
-        expect(json['photos']).to eq(photos)
-      end
-
+    context 'when photographer exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
+      end
+
+      it 'returns all photographer photos' do
+        expect(json.size).to eq(20)
       end
     end
   end
