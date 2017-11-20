@@ -37,6 +37,18 @@ RSpec.describe 'Photographers API', type: :request do
         expect(json.size).to eq(20)
       end
     end
+
+    context 'when photographer does not exist' do
+      let(:photographer_id) { 0 }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Photographer/)
+      end
+    end
   end
 
 end
