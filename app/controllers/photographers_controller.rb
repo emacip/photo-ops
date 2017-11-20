@@ -14,7 +14,7 @@ class PhotographersController < ApplicationController
 
   private
 
-  def todo_params
+  def photographer_params
     # whitelist params
     params.permit(:name)
   end
