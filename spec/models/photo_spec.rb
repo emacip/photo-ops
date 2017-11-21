@@ -10,4 +10,9 @@ RSpec.describe Photo, type: :model do
   # ensure column url and code are present before saving
   it { is_expected.to  validate_presence_of(:url) }
   it { is_expected.to  validate_presence_of(:code) }
+  it { is_expected.to  have_attached_file(:image) }
+  it { is_expected.to  validate_attachment_presence(:image) }
+  it { is_expected.to  validate_attachment_content_type(:image).
+      allowing('image/jpg') }
+  it { is_expected.to  validate_attachment_size(:image).less_than(2.megabytes) }
 end

@@ -1,5 +1,6 @@
 # spec/requests/photos_spec.rb
 require 'rails_helper'
+require 'rack/test'
 
 
 RSpec.describe 'Photos API', type: :request do
@@ -39,7 +40,9 @@ RSpec.describe 'Photos API', type: :request do
 
   # Test suite for PUT /photographers/:photographer_id/photos
   describe 'POST /photographers/:photographer_id/photos' do
-    let(:valid_attributes) { { url: 'http://thiel.com/chauncey_simonis', code: '6b5ed240042e8a65c55ddb826c3408e6' } }
+    let(:valid_attributes) { { url: 'http://thiel.com/chauncey_simonis', code: '6b5ed240042e8a65c55ddb826c3408e6',
+                               image: Rack::Test::UploadedFile.new(Rails.root.join('spec','fixtures', 'assets','test_file.jpg'),
+                                                                   'image/jpg') } }
 
     context 'when request attributes are valid' do
       before { post "/photographers/#{photographer_id}/photos", params: valid_attributes }

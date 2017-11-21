@@ -15,7 +15,7 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.permit(:url, :code)
+    params.permit(:url, :code, :image)
   end
 
   def set_photographer
