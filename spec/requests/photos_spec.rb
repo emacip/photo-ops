@@ -6,7 +6,7 @@ require 'rack/test'
 RSpec.describe 'Photos API', type: :request do
   # initialize test data
   let!(:photographer) { create(:photographer) }
-  let!(:photos) { create_list(:photo, 20, photographer_id: photographer.id) }
+  let!(:photos) { create_list(:photo, 2, photographer_id: photographer.id) }
   let(:photographer_id) { photographer.id }
 
   # Test suite for GET /photographers/:photographer_id/photos
@@ -20,7 +20,7 @@ RSpec.describe 'Photos API', type: :request do
       end
 
       it 'returns all photographer photos' do
-        expect(json.size).to eq(20)
+        expect(json.size).to eq(2)
       end
     end
 
