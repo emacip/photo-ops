@@ -9,13 +9,13 @@ class PhotosController < ApplicationController
 
   # GET /photographers/:photographer_id/photos/:code
   def show
-    json_response(return_image(@photo.image))
+    type = params[:type].present? ? params[:type] : 'medium'
+    json_response(return_image(@photo.image.url(type), type))
   end
 
   # POST /photographers/:photographer_id/photos
   def create
     @photographer.photos.create!(photo_params)
-
     json_response(return_code(@photographer.photos), :created)
   end
 
@@ -33,9 +33,10 @@ class PhotosController < ApplicationController
     }
   end
 
-  def return_image(image)
+  def return_image(url, type)
     {
-        image_url: image.url
+        image_url: url,
+        type: type
     }
   end
 

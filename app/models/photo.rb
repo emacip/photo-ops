@@ -7,7 +7,7 @@ class Photo < ApplicationRecord
   validates_presence_of :url
   #validates_inclusion_of :revoke, :in => [true, false]
   validates :image, attachment_presence: true
-  has_attached_file :image, styles: { large: "2048x1152>", medium: "851x315>" },
+  has_attached_file :image, styles: { large: "2048x1152>", medium: "851x315>", small: "350X100" },
                     default_url: "/images/:style/missing.png",
                     adapter_options: { hash_digest: Digest::SHA256 }
   validates_attachment_content_type :image, content_type: "image/jpg"
