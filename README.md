@@ -39,7 +39,7 @@ All the endpoints are tested in the requests folder and have comments and annota
 
 In the controllers/concerns I have two modules to manage all the response of the API, `json_response` and `exception_handler`.
 
-######Paperclip, why use this gem?
+#####Paperclip, why use this gem?
 [Paperclip](https://github.com/thoughtbot/paperclip)
 
 In my opinion, the best gem for file attachment. 
@@ -50,7 +50,7 @@ Currently I use the File Store in the public folder but the AWS S3 integration i
 
 Paperclip support Fingerprint your files. One of the requirements for Scaling. [Guides Asset Pipeline](http://guides.rubyonrails.org/asset_pipeline.html#what-is-fingerprinting-and-why-should-i-care-questionmark)
 
-######The multiple files per upload challenge.
+#####The multiple files per upload challenge.
 The challenge here is test all the functionality, send a hash of photos with the parameters, and itearate later in the controller to create the photo related with the photographer, very similar like here [StackOverflow code](https://stackoverflow.com/questions/37063613/how-to-upload-multiple-images-using-paperclip)
 But I was not so happy, so my idea for do that is use something like [dropzonejs](http://www.dropzonejs.com/) and generate diferents Ajax request for  the Post. Issue here, is going to generate multiple codes.  
 [Blog explain uploads multipe Files with DropzoneJS and Paperclip](http://geekhmer.github.io/blog/2015/02/10/ruby-on-rails-uploads-multiple-files-with-dropzonejs-and-paperclip-gem/)
