@@ -47,10 +47,31 @@ RSpec.describe 'Photos API', type: :request do
         expect(response).to have_http_status(200)
       end
     end
-
-
   end
 
+  # Test suite for PUT /photographers/:photographer_id/photos/:code/revoke
+  describe 'PUT /photographers/:photographer_id/photos/:code/revoke' do
+    let!(:photographer) { create(:photographer) }
+    let!(:photo) { create(:photo,  photographer_id: photographer.id) }
+    let(:code) { photo.code }
+
+    context 'Organiser revoke an access code' do
+      let(:valid_attributes) { { revoke: true } }
+
+      # make HTTP get request before each example
+      before { put "/photographers/#{photographer_id}/photos/#{code}/revoke" , params: valid_attributes}
+
+
+      it 'updates the record' do
+        expect(response.body).to be_empty
+      end
+
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+  end
 
 
 end

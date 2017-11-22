@@ -5,12 +5,15 @@ class Photo < ApplicationRecord
 
   # validations
   validates_presence_of :url
+  #validates_inclusion_of :revoke, :in => [true, false]
   validates :image, attachment_presence: true
   has_attached_file :image, styles: { large: "2048x1152>", medium: "851x315>" },
                     default_url: "/images/:style/missing.png",
                     adapter_options: { hash_digest: Digest::SHA256 }
   validates_attachment_content_type :image, content_type: "image/jpg"
   validates_with AttachmentSizeValidator, attributes: :image, less_than: 2.megabytes
+
+  scope :not_revoked,   -> { where(revoke: false) }
 
   private
 

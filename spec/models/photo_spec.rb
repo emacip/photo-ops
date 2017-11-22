@@ -9,6 +9,7 @@ RSpec.describe Photo, type: :model do
   # Validation tests
   # ensure column url and code are present before saving
   it { is_expected.to  validate_presence_of(:url) }
+  #it { is_expected.to  validate_inclusion_of(:revoke).in_array([true, false]) }
   it { is_expected.to  have_attached_file(:image) }
   it { is_expected.to  validate_attachment_presence(:image) }
   it { is_expected.to  validate_attachment_content_type(:image).

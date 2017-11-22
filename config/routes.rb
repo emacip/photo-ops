@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :photos do
       collection do
         get '/:code', controller: :photos, action: :show
+        put '/:code/revoke', controller: :photos, action: :revoke, as: :revoke_photo
       end
     end
   end

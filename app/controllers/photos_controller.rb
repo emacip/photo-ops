@@ -19,6 +19,12 @@ class PhotosController < ApplicationController
     json_response(return_code(@photographer.photos), :created)
   end
 
+  # PUT /photographers/:photographer_id/photos/:code/revoke
+  def revoke
+    @photographer.photos.update(photo_params)
+    head :no_content
+  end
+
   private
 
   def return_code(photos)
@@ -34,7 +40,7 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.permit(:url, :code, :image)
+    params.permit(:url, :code, :image, :revoke)
   end
 
   def set_photographer
@@ -42,7 +48,7 @@ class PhotosController < ApplicationController
   end
 
   def set_photo
-    @photo = Photo.find_by(code: params[:code])
+    @photo = Photo.not_revoked.find_by(code: params[:code])
   end
   
 end
