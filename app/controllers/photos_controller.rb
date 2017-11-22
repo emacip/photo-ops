@@ -9,10 +9,17 @@ class PhotosController < ApplicationController
   # POST /photographers/:photographer_id/photos
   def create
     @photographer.photos.create!(photo_params)
-    json_response(@photographer, :created)
+
+    json_response(return_code(@photographer.photos), :created)
   end
 
   private
+
+  def return_code(photos)
+    {
+        code: photos.map(&:code)
+    }
+  end
 
   def photo_params
     params.permit(:url, :code, :image)
