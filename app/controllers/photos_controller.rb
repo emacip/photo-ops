@@ -1,9 +1,15 @@
 class PhotosController < ApplicationController
-  before_action :set_photographer
+  before_action :set_photographer, except: [:show]
+  before_action :set_photo, only: [:show]
 
   # GET /photographers/:photographer_id/photos
   def index
     json_response(@photographer.photos)
+  end
+
+  # GET /photographers/:photographer_id/photos/:code
+  def show
+    json_response(return_image(@photo.image))
   end
 
   # POST /photographers/:photographer_id/photos
@@ -21,12 +27,22 @@ class PhotosController < ApplicationController
     }
   end
 
+  def return_image(image)
+    {
+        image_url: image.url
+    }
+  end
+
   def photo_params
     params.permit(:url, :code, :image)
   end
 
   def set_photographer
     @photographer = Photographer.find(params[:photographer_id])
+  end
+
+  def set_photo
+    @photo = Photo.find_by(code: params[:code])
   end
   
 end

@@ -27,6 +27,27 @@ RSpec.describe 'Photos API', type: :request do
         expect(json.size).to eq(1)
       end
     end
+  end
+
+  # Test suite for GET /photos/:code
+  describe 'GET /photographers/:photographer_id/photos/:code' do
+    let!(:photographer) { create(:photographer) }
+    let!(:photo) { create(:photo,  photographer_id: photographer.id) }
+    let(:code) { photo.code }
+
+    # make HTTP get request before each example
+    before { get "/photographers/#{photographer_id}/photos/#{code}" }
+
+    context 'Photographs match with the code' do
+      it 'returns image' do
+        expect(json.size).to eq(1)
+      end
+
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+    end
+
 
   end
 
